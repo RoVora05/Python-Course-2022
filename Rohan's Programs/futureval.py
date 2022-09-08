@@ -5,5 +5,5 @@ def main():
     period=eval(input("Enter the period: "))
     for i in range (10*period):
         principal*=(1+(rate))
-    print("The value in",years, "years is", principal)
+    print("The value in",period, "years is", principal)
 main()
