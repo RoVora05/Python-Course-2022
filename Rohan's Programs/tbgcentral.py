@@ -1,11 +1,8 @@
-def main():
+def roomlogic(room):
     gameover=False
-    room=1
-    name=input("Please enter your name: ")
     print ("introduction stuff")
-    inventory=["compass"]
     options=["1. look around","2. check inventory","3. use item","4. interact with environment","5. move"]
-    while gameover==1:
+    while gameover==False:
         print("You can:",options)
         action=input("What do you do? ")
         print("")
@@ -14,7 +11,7 @@ def main():
             print("room description")
         
         elif action=="2":
-            print("your inventory contains",inventory)
+            print("your inventory contains",) # make an inventory.txt
         
         elif action=="3":
             useitem=input("Which item will you use? ")
@@ -30,6 +27,9 @@ def main():
         
         print("")
 
-        
+roomlogic()
 
-main()
+def intro():
+    global name
+    name=input("Please enter your name: ")
+intro()
