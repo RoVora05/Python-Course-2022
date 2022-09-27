@@ -1,3 +1,8 @@
+def intro():
+    global name
+    name=input("Please enter your name: ")
+intro()
+
 def roomlogic(room):
     gameover=False
     print ("introduction stuff")
@@ -28,8 +33,3 @@ def roomlogic(room):
         print("")
 
 roomlogic()
-
-def intro():
-    global name
-    name=input("Please enter your name: ")
-intro()
