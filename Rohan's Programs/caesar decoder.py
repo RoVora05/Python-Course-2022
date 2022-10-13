@@ -1,3 +1,6 @@
+from calendar import c
+
+
 def decode():
     print("Enter your code.")
     print("(Only use capital letters and spaces)")
@@ -14,7 +17,6 @@ def decode():
         final+=chr(char)
     print(final)
     print("")
-decode()
 
 def encode():
     print("Enter your phrase.")
@@ -32,4 +34,21 @@ def encode():
         final+=chr(char)
     print(final)
     print("")
-encode()
+
+def main():
+    x=0
+    while x==0:
+        query=input("Would you like to encode, decode, or exit? (c/d/e): ")
+        if query=="c":
+            print("")
+            encode()
+        elif query=="d":
+            print("")
+            decode()
+        elif query=="e":
+            x=1
+        else:
+            print("Invalid Response")
+
+if __name__=="__main__":
+    main()
