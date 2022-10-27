@@ -6,9 +6,10 @@ def intro():
 
     file_location="c:/Users/h4cke/Python Files Clone/Python-Class-Files/Rohan's Programs/Text Based Game/"
     name=input("Please enter your name: ")
-    file=open(file_location+"playerdata.txt",'w')
-    file.write(name)
-    print("Intro text")
+    file=open(file_location+"room_descriptions.txt",'r')
+    lines=file.readlines()
+
+    print(lines[0])
 intro()
 
 def roomlogic():

@@ -1,2 +1,3 @@
-There's nothing interesting in this room, just a desk with a key on it and a locked door going west. I really hope you can put this together.
-The only thing in this room is a stack of hay. There is a locked door going west again.
+You wake up in your room in the dungeon. Again. It's probably time to leave this place.
+There's nothing interesting in this room, just a desk with a key on it and a locked door going forward. I really hope you can put this together.
+The only thing in this room is a stack of hay. There is a locked door going forward again.
