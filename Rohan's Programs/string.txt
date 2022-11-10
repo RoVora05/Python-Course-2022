@@ -1,0 +1,2 @@
+This file is called string.txt
+It has 2 lines of text.
