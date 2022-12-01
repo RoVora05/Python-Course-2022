@@ -1,17 +1,10 @@
 from tbgcentral import *
 def room2():
+    hasNeedle=False
     doorunlocked=False
-
     roomdone=False
+    invlist="You don't have an item."
     while roomdone==False:
-        
-        invread=open(file_location+"inventory.txt","r")
-        invlist=invread.read().splitlines()
-
-        invapp=open(file_location+"inventory.txt","a")
-        
-        invwrite=open(file_location+"inventory.txt","w")
-        
 
         print("You can:",*options, sep = ", ")
         action=input("What do you do? ")
@@ -21,24 +14,25 @@ def room2():
             print("The only thing in this room is a stack of hay.\nThere is a locked door going forward again.")
         
         elif action=="2":
-            print("your inventory contains: ")
             print(invlist)
         
         elif action=="3":
             useitem=input("Which item will you use? ")
-            if useitem=="needle" and invlist[1]=="Needle":
-                print("You try to pick the lock, only to realize that you don't know how to pick locks.\nThe disappointing quality of door-opening mechanisms here might become a recurring theme.")
+            if useitem=="needle" and hasNeedle==True:
+                print("You try to pick the lock, only to realize that you don't know how to pick locks.\nBoth the needle and the lock break, and the door opens.")
                 doorunlocked=True
-                remove_item(invlist,"Needle",invwrite)
-            else:
-                print("You can't use your that here.")
+                hasNeedle=False
+                invlist="You don't have an item."
 
+            else:
+                print("You don't have that.")
 
         elif action=="4":
             interact=input("What in the room would you like to interact with? ")
             if interact=="hay" or "haystack":
                 print("You dig through the haystack and find a needle.\nIronic.")
-                invapp.write("Needle")
+                hasNeedle=True
+                invlist="It's a needle. You don't want to think about how you got it."
             else:
                 print("You can't interact with",interact)
         
@@ -47,8 +41,8 @@ def room2():
             if move=="forward":
                 if doorunlocked==True:
                     print("You move into the room in front of you.")
-                    roomnum+=1
                     roomdone=True
+                    return 3
                 else:
                     print("The door is locked.")
             elif move=="back":
@@ -59,6 +53,3 @@ def room2():
             print("Sorry, that wasn't an option.")
 
         print("")
-        invapp.close()
-        invread.close()
-        invwrite.close()

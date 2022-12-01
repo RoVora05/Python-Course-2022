@@ -1,17 +1,10 @@
 from tbgcentral import *
 def room3():
     doorunlocked=False
-
     roomdone=False
-    while roomdone==False:
-        
-        invread=open(file_location+"inventory.txt","r")
-        invlist=invread.read().splitlines()
+    invlist="You don't have an item."
 
-        invapp=open(file_location+"inventory.txt","a")
-        
-        invwrite=open(file_location+"inventory.txt","w")
-        
+    while roomdone==False:
 
         print("You can:",*options, sep = ", ")
         action=input("What do you do? ")
@@ -21,12 +14,11 @@ def room3():
             print("This room 5 buttons, with a lantern corresponding to each button.\nThere is yet another locked door going forward, but this door has no keyhole on it.")
         
         elif action=="2":
-            print("your inventory contains: ")
             print(invlist)
         
         elif action=="3":
             useitem=input("Which item will you use? ")
-            print("You can't use your that here.")
+            print("You don't have that.")
 
 
         elif action=="4":
@@ -55,7 +47,7 @@ def room3():
                             displaylist[i]="\u25CF"
                     print(*displaylist)
                     if displaylist==["\u25CF","\u25CF","\u25CF","\u25CF","\u25CF"]:
-                        print("You hear the lock on the door click.")
+                        print("You hear the lock in the door click.")
                         x=0
                         doorunlocked=True
             else:
@@ -66,21 +58,18 @@ def room3():
             if move=="forward":
                 if doorunlocked==True:
                     print("You move into the room in front of you.")
-                    roomnum+=1
                     roomdone=True
+                    return 4
                 else:
                     print("The door is locked.")
             elif move=="back":
-                print("The door locked on its own again.\nThere's no way to go back.")
+                print("The door closed behind you, and it will no longer open because you broke the lock.\nThere's no way to go back.")
             else:
                 print("That wasn't an option.")
         else:
             print("Sorry, that wasn't an option.")
 
         print("")
-        invapp.close()
-        invread.close()
-        invwrite.close()
 
 def lanternListEditor(lantern,list):
     if lantern==0:
