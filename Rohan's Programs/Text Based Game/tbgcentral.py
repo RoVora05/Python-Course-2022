@@ -6,7 +6,7 @@ def main():
     room1()
     room2()
     room3()
-    print("You step out into the sunlight, after what feels like ages.\n...\nSeriously?\nYou were sitting in that dungeon for who knows how long, and all it took to escape was going through 3 unguarded rooms?\nYou started in a room where the key was literally right in front of you.\nThis makes you irrationally upset.\n...\n\nGAME OVER")
+    print("You step out into the sunlight, after what feels like ages.\n...\nSeriously?\nYou were sitting in that dungeon for who knows how long, and all it took to escape was going through 3 unguarded rooms?\nYou started in a room where the key was literally right in front of you.\nThis makes you reasonably upset.\n...\n\nGAME OVER")
 
     
 def room1():
@@ -28,14 +28,13 @@ def room1():
             print(invlist)
         
         elif action=="3":
-            useitem=input("Which item will you use?\n")
-            if useitem=="key" and hasKey==True:
+            if hasKey==True:
                 print("The key fits into the door's lock, and immediately breaks.\nPoor quality key, but at least the door is open.")
                 doorunlocked=True
                 hasKey=False
                 invlist="You don't have an item."
             else:
-                print("You don't have that.")
+                print("You don't have an item.")
 
 
         elif action=="4":
@@ -85,15 +84,14 @@ def room2():
             print(invlist)
         
         elif action=="3":
-            useitem=input("Which item will you use?\n")
-            if useitem=="needle" and hasNeedle==True:
+            if hasNeedle==True:
                 print("You try to pick the lock, only to realize that you don't know how to pick locks.\nBoth the needle and the lock break, and the door opens.")
                 doorunlocked=True
                 hasNeedle=False
                 invlist="You don't have an item."
 
             else:
-                print("You don't have that.")
+                print("You don't have an item.")
 
         elif action=="4":
             interact=input("What in the room would you like to interact with?\n")
@@ -141,8 +139,7 @@ def room3():
             print(invlist)
         
         elif action=="3":
-            useitem=input("Which item will you use?\n")
-            print("You don't have that.")
+            print("You don't have an item.")
 
 
         elif action=="4":
