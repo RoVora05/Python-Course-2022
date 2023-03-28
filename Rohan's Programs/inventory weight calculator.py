@@ -194,7 +194,7 @@ def main():
             price+=1000
             print("This is the arcane focus.")
             print("If you're looking for the druidic focus, try 'yew wand'.")
-        elif item=="sprig of mistletoe" or "mistletoe":
+        elif item=="sprig of mistletoe" or item=="mistletoe":
             weight+=0
             price+=100
         elif item=="totem":
@@ -218,9 +218,9 @@ def main():
         elif item=="abacus":
             weight+=2
             price+=200
-        elif item=="vial of acid" or "acid vial" or "acid":
+        elif item=="vial of acid" or item=="acid vial" or item=="acid":
             weight+=1
             price+=2500
-        elif item=="alchemist's fire" or "alchemists fire":
+        elif item=="alchemist's fire" or item=="alchemists fire":
             weight+=1
             price+=5000
