@@ -1,0 +1,18 @@
+def main():
+    while game:
+        bookkeeping
+        while round:
+            draw hands
+            1st bet
+                if fold:
+                    break
+            burn card, reveal flop
+            bet
+            burn card, reveal turn
+            last bet
+            burn card, reveal river
+            pick cards, bots pick cards
+            payout
+        if money<=0
+            print("YOU ARE BROKE")
+            game=False

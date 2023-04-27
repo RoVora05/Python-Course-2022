@@ -4,7 +4,7 @@ import os
 class card():
     def __init__(self,rank,suite):      
         self.rank=str(rank)
-        self.loc="Cards\\"+str(rank)+suite[0]+".png"
+        self.loc="Cards\\"+str(rank)+suite[0]+".png" # 64 x 89 pixels
         if rank==1:
             self.rank="Ace"
             rank=14
@@ -26,6 +26,12 @@ class card():
 class deck():
     def __init__(self):
         self.orderedList=[]
+        for i in range(13):
+            for e in ["Clubs","Diamonds","Hearts","Spades"]:
+                self.orderedList.append(card(i+1,e))
+        self.shuffle()
+
+    def resetDeck(self):
         for i in range(13):
             for e in ["Clubs","Diamonds","Hearts","Spades"]:
                 self.orderedList.append(card(i+1,e))
@@ -99,4 +105,4 @@ def checkHand(hand):
     else:
         return 0.1*sortedHand[-1]
 
-cardBack="Cards/backR"
+cardBack="Cards/backR.png"

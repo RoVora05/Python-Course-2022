@@ -13,6 +13,8 @@ class player():
     
     def getHand(self): return self.hand
 
+    def clearHand(self): self.hand=[]
+
     def __str__(self): return self.playerName
 
 def main():
@@ -58,10 +60,6 @@ def chooseCardsList(community,hand):
             bestHand=e
             value=c
     return value,bestHand
-
-
-
-main()
 
 """
 [[1,2,3],
