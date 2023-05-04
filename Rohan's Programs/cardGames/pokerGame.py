@@ -6,14 +6,16 @@ class player():
     def __init__(self,name):
         self.playerName=name
         self.hand=[]
+        self.chosenCards=[]
     
     def name(self): return self.playerName
-
     def giveHand(self,hand): self.hand.extend(hand)
-    
     def getHand(self): return self.hand
-
     def clearHand(self): self.hand=[]
+    def giveChosenCards(self,chosenCards): self.chosenCards.extend(chosenCards)
+    def getChosenCards(self): return self.chosenCards
+    def giveHandValue(self,handValue):self.handValue=handValue
+    def getHandValue(self): return self.handValue
 
     def __str__(self): return self.playerName
 
