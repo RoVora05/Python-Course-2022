@@ -17,8 +17,8 @@ def main():
     s=time.time()
     print(nFinderIt(nG))
     print(time.time()-s)
-    s=time.time()
+"""    s=time.time()
     print(nFinder(nG,1,1,0))
-    print(time.time()-s)
+    print(time.time()-s)"""
 main()
 

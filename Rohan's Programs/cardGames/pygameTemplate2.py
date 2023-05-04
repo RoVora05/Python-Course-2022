@@ -16,6 +16,7 @@ money= 1000
 cardDeck=deck()
 flop=[]
 stakes=0
+gameOrder=["dealHands","bet","burn","revealFlop","bet","burn","turnRiver","bet","burn","turnRiver","payOut","cleanUp"]
 playerList=[player("You"),player("Player 2"),player("Player 3"),player("Player 4")]
 while running:
     # poll for events
@@ -39,9 +40,19 @@ pygame.quit()
 def dealHands():
     for i in range(4):
         playerList[i].giveHand(cardDeck.draw(2))
-    
+    handGraphic=[pygame.image.load(playerList[0].getHand()[0]),pygame.image.load(playerList[0].getHand()[1])]
+    for i,e in enumerate(handGraphic):
+            screen.blit(e,) # define coordinates
 
-def bet():1
+def betChoice(betN):
+    if betN==0: folding=True
+    else: folding=False
+def betValue():
+    size,loc,textSize=0 # define coordinates
+    b50=button(size,loc,"white","50",textSize)
+    b100=button(size,loc,"white","100",textSize)
+    b250=button(size,loc,"white","250",textSize)
+    b500=button(size,loc,"white","500",textSize)
 
 def burn():
     cardDeck.draw()
@@ -67,10 +78,10 @@ def gameOver():
     1
 
 class button():
-    def __init__(self,size,loc,color,text):
+    def __init__(self,size,loc,color,text,textSize):
         self.buttonRect=pygame.Rect(loc[0],loc[1],size[0],size[1])
         self.color=color
-        self.text=pygame.font.Font(None,28)
+        self.text=pygame.font.Font(None,textSize)
         self.textSurface=self.text.render(text,True,(0,0,0),None)
     def getRect(self): return self.buttonRect
     def getColor(self):return self.color
