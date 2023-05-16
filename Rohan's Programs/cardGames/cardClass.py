@@ -63,14 +63,18 @@ def checkHand(hand):
     four=False
     flush=False
     straight=True
+    val=0
     for e in rankC:
         if rankC[e]==2:
             pairs+=1
+            if val<=e:val=e
         elif rankC[e]==3:
             three=True
+            if val<=e:val=e
         elif rankC[e]==4:
             four=True
-    
+            if val<=e:val=e
+
     suiteC=Counter(handSuites)
     for e in suiteC:
         if suiteC[e]==5:
@@ -83,26 +87,25 @@ def checkHand(hand):
     if sortedHand==[2,3,4,5,14]:
         straight=True
 
-    print()
     if straight and flush and sortedHand[0]==10:
-        return 10
+        return 10,"Royal Flush"
     elif straight and flush:
-        return 9
+        return 9+(0.01*sortedHand[0]),"Straight Flush"
     elif four:
-        return 8
+        return 8+(0.01*val),"Four of a Kind"
     elif three and pairs==1:
-        return 7
+        return 7+(0.01*val),"Full House"
     elif flush:
-        return 6
+        return 6+(0.01*sortedHand[0]),"Flush"
     elif straight:
-        return 5
+        return 5+(0.01*sortedHand[0]),"Straight"
     elif three:
-        return 4
+        return 4+(0.01*val),"Three of a Kind"
     elif pairs==2:
-        return 3
+        return 3+(0.01*val),"Two Pair"
     elif pairs==1:
-        return 2
+        return 2+(0.01*val),"Pair"
     else:
-        return 0.1*sortedHand[-1]
+        return 0.01*sortedHand[-1],"High Card; "+str(sortedHand[-1])
 
 cardBack="Cards/backR.png"

@@ -17,23 +17,33 @@ cardDeck=deck()
 flop=[]
 stakes=0
 state=0
-gameOrder=["dealHands","bet","burn","revealFlop","bet","burn","turnRiver","bet","burn","turnRiver","payOut",]
+gameOrder=["dealHands","bet","burn","revealFlop","bet","burn","turnRiver","bet","burn","turnRiver","payOut"]
 playerList=[player("You"),player("Player 2"),player("Player 3"),player("Player 4")]
 def main():
+    global screen
+    global state
+    nextbutton=button(size,loc,"white",">",textSize)
     while running:
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
         # fill the screen with a color to wipe away anything from last frame
         screen.fill("dark green")
         if gameOrder[state]=="dealHands":
-            dealHands()
+            if playerList[0].getHand()==[]:dealHands()
+            else:
+                handGraphic=[pygame.image.load(playerList[0].getHand()[0]),pygame.image.load(playerList[0].getHand()[1])]
+                for i,e in enumerate(handGraphic):
+                    screen.blit(e,) # define coordinates
+                nextbutton.drawButton(screen)
+            for event in pygame.event.get():
+                if event.type==pygame.MOUSEBUTTONDOWN:
+                    if nextbutton.getRect().collidepoint(pygame.mouse.get_pos()):
+                        state+=1
         elif gameOrder[state]=="bet":
-            betChoice()
-            betValue()
+            bet(screen)
         elif gameOrder[state]=="burn":
             burn()
         elif gameOrder[state]=="revealFlop":
@@ -58,20 +68,38 @@ def main():
 def dealHands():
     for i in range(4):
         playerList[i].giveHand(cardDeck.draw(2))
-    handGraphic=[pygame.image.load(playerList[0].getHand()[0]),pygame.image.load(playerList[0].getHand()[1])]
-    for i,e in enumerate(handGraphic):
-            screen.blit(e,) # define coordinates
 
-def betChoice(betN):
-    if betN==0: folding=True
-    else: folding=False
-def betValue():
+def bet(screen):
+    global money
+    global stakes
     size,loc,textSize=0 # define coordinates
+    b0=button(size,loc,"white","None",textSize)
     b20=button(size,loc,"white","20",textSize)
     b50=button(size,loc,"white","50",textSize)
     b100=button(size,loc,"white","100",textSize)
     b250=button(size,loc,"white","250",textSize)
-    b500=button(size,loc,"white","500",textSize)
+    bL=[b0,b20,b50,b100,b250]
+    for e in bL:
+        e.drawButton(screen)
+    for event in pygame.event.get():
+        if event.type==pygame.MOUSEBUTTONDOWN:
+            mousePos=pygame.mouse.get_pos()
+            if b0.getRect().collidepoint(mousePos):
+                money-=0
+                stakes+=0
+            if b20.getRect().collidepoint(mousePos):
+                money-=20
+                stakes+=80
+            if b50.getRect().collidepoint(mousePos):
+                money-=50
+                stakes+=200
+            if b100.getRect().collidepoint(mousePos):
+                money-=100
+                stakes+=400
+            if b250.getRect().collidepoint(mousePos):
+                money-=250
+                stakes+=1000
+
 
 def burn():
     cardDeck.draw()
@@ -135,4 +163,12 @@ class button():
     def getRect(self): return self.buttonRect
     def getColor(self):return self.color
     def getTextSurface(self): return self.textSurface
+    def drawButton(self,screen):
+        screen.fill(self.color,self.buttonRect)
+        screen.blit(self.textSurface,self.buttonRect)
 
+class clickable():
+    def __init__(self,card,loc):
+        self.card=card
+        self.surface=card.cardGraphic()
+        self.loc=
