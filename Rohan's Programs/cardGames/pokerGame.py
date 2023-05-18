@@ -23,6 +23,9 @@ class player():
 
 def main():
     game=True
+    bigWins=0
+    wins=0
+    loses=0
     money=100
     stakes=0
     while game:
@@ -30,7 +33,7 @@ def main():
         playerList=[player("You"),player("Player 2"),player("Player 3"),player("Player 4")]
         playerList[0].giveHand(cardDeck.draw(2))
         input("Your hand contains the "+str(playerList[0].getHand()[0])+" and the "+str(playerList[0].getHand()[1])+".")
-        print
+        print()
         playerList[1].giveHand(cardDeck.draw(2))
         playerList[2].giveHand(cardDeck.draw(2))
         playerList[3].giveHand(cardDeck.draw(2))
@@ -105,7 +108,7 @@ def main():
     
         sortedPlayerList=sorted(playerList, key=lambda e:e.getHandValue())
         sortedPlayerList.reverse()
-        print(str(sortedPlayerList[0])+" won with a "+str(sortedPlayerList[0].getHandName())+"!")
+        print(str(sortedPlayerList[0])+" won with a "+str(sortedPlayerList[0].getHandName())+"!\n")
         placement=["1st Place: ","2nd Place: ","3rd Place: ","4th Place: "]
         for i,e in enumerate(sortedPlayerList):
             print(placement[i]+str(e)+" - "+str(e.getChosenCards()[0]),str(e.getChosenCards()[1]),str(e.getChosenCards()[2]),str(e.getChosenCards()[3]),str(e.getChosenCards()[4]), sep=", ")
@@ -113,31 +116,40 @@ def main():
 
         if sortedPlayerList[0].name()=="You":
             money+=stakes
+            wins+=1
             print("You won $"+str(stakes))
+        else: loses+=1
+        stakes=0
         input("You now have $"+str(money))
         print()
         if money<=0:
-            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
             print("GAME OVER\nYou ran out of money!")
+            game=False
+        elif money>=1000 and bigWins==0:
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+            input("You turned $100 into $1000!\nYou won",wins,"games and lost",loses,"games.")
+            bigWins+=1
             game=False
 
 def bet(money):
     while True:
         print("\nYou have $"+str(money))
-        bet=input("Enter the value of your bet:\n")
-        if bet=='':
-            input("You must enter a value.")
+        if money<=0:
+            input("You bet $1 because you are broke.")
+            return 1
         else:
-            bet=int(bet)
-            if bet<=0: 
-                input("You must bet a positive amount.")
-            elif bet>money:
-                input("You cannot bet more money than you have.")
-                bet=-1
+            bet=input("Enter the value of your bet:\n")
+            if bet=='':
+                input("You must enter a value.")
             else:
-                input("The other players match your bet.")
-                print()
-                return bet
+                bet=int(bet)
+                if bet<=0: 
+                    input("You must bet a positive amount.")
+                else:
+                    input("The other players match your bet.")
+                    print()
+                    return bet
 
 def chooseCardsList(community,hand):
     combination=[[community[0],community[1],community[2]],[community[0],community[1],community[3]],[community[0],community[1],community[4]],[community[0],community[2],community[3]],[community[0],community[2],community[4]],[community[0],community[3],community[4]],[community[1],community[2],community[3]],[community[1],community[2],community[4]],[community[1],community[3],community[4]],[community[2],community[3],community[4]]]
